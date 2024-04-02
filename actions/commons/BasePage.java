@@ -168,6 +168,9 @@ public class BasePage {
     public void clickAndHoverToElement(WebDriver driver, String locator){
         new Actions(driver).clickAndHold(findElement(driver,locator)).perform();
     }
+    public void releaseLeftMouse(WebDriver driver){
+        new Actions(driver).release();
+    }
     public void doubleClickToElement(WebDriver driver, String locator){
         new Actions(driver).doubleClick(findElement(driver,locator)).perform();
     }

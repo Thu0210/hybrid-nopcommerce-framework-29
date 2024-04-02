@@ -1,6 +1,7 @@
 package com.nopcommerce.users;
 
 import commons.BasePage;
+import commons.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
@@ -14,60 +15,68 @@ import pageObjects.RegisterPageObject;
 
 import java.time.Duration;
 
-public class User_04_Page_Object_Partern extends BasePage {
-    WebDriver driver;
-    HomePageObject homePageObject;
-    LoginPageObject loginPageObject;
-    RegisterPageObject registerPageObject;
-    CustomerInfoPageObject customerInfoPageObject;
+public class User_04_Page_Object_Partern extends BaseTest {
+    public WebDriver driver;
+    private HomePageObject homePageObject;
+    private LoginPageObject loginPageObject;
+    private RegisterPageObject registerPageObject;
+    private CustomerInfoPageObject customerInfoPageObject;
+    String firsName = "Lele";
+    String lastName ="LeNa";
+    String dayOfBirth = "10";
+    String monthOfBirth = "January";
+    String yearofBirth = "1998";
+    String email = "lele" + generateRandomNumber() + "@gmail.com";
+    String companyName ="TestAutomation";
+    String password = "123456";
 
     @BeforeClass
     public void beforeClass() {
         driver = new FirefoxDriver();
         driver.get("https://demo.nopcommerce.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        homePageObject = new HomePageObject();
+        homePageObject = new HomePageObject(driver);
 
     }
 
     @Test
     public void User_01_Register() {
         homePageObject.clickToRegisterLink();
-        registerPageObject = new RegisterPageObject();
+        registerPageObject = new RegisterPageObject(driver);
         registerPageObject.selectMaleRadio();
-        registerPageObject.inputFirstNameTextbox("");
-        registerPageObject.inputLastNameTextbox("");
-        registerPageObject.selectDayofBirth("");
-        registerPageObject.selectMonthofBirth("");
-        registerPageObject.selectYearofBirth("");
-        registerPageObject.inputEmailTextbox("");
-        registerPageObject.inputCompanyNameTextbox("");
-        registerPageObject.inputPasswordTextbox("");
-        registerPageObject.inputConfirmPasswordTextbox("");
+        registerPageObject.inputFirstNameTextbox(firsName);
+        registerPageObject.inputLastNameTextbox(lastName);
+        registerPageObject.selectDayofBirth(dayOfBirth);
+        registerPageObject.selectMonthofBirth(monthOfBirth);
+        registerPageObject.selectYearofBirth(yearofBirth);
+        registerPageObject.inputEmailTextbox(email);
+        registerPageObject.inputCompanyNameTextbox(companyName);
+        registerPageObject.inputPasswordTextbox(password);
+        registerPageObject.inputConfirmPasswordTextbox(password);
         registerPageObject.clickRegisterButton();
-        Assert.assertEquals(registerPageObject.isCompletedRegisterMessageDisplayed(), "Your registration completed");
-        registerPageObject.clickContinueButton();
+        Assert.assertTrue(registerPageObject.isCompletedRegisterMessageDisplayed());
+        //registerPageObject.clickContinueButton();
 
 
     }
     @Test
     public void User_02_Login(){
         registerPageObject.clickOnLoginLink();
-        loginPageObject = new LoginPageObject();
-        loginPageObject.inputEmailTextbox("");
-        loginPageObject.inputPasswordTextbox("");
+        loginPageObject = new LoginPageObject(driver);
+        loginPageObject.inputEmailTextbox(email);
+        loginPageObject.inputPasswordTextbox(password);
         loginPageObject.clickOnLoginButton();
+        homePageObject = new HomePageObject(driver);
 
     }
     @Test
     public void User_03_Customer_Info(){
-        homePageObject = new HomePageObject();
         homePageObject.clickOnMyAccountLink();
-        customerInfoPageObject = new CustomerInfoPageObject();
-        Assert.assertEquals(customerInfoPageObject.getFirstNameTextbox(), "");
-        Assert.assertEquals(customerInfoPageObject.getLastNameTextbox(), "");
-        Assert.assertEquals(customerInfoPageObject.getEmailTextbox(), "");
-        Assert.assertEquals(customerInfoPageObject.getCompanyNameTextbox(), "");
+        customerInfoPageObject = new CustomerInfoPageObject(driver);
+        Assert.assertEquals(customerInfoPageObject.getFirstNameTextbox("value"),firsName );
+        Assert.assertEquals(customerInfoPageObject.getLastNameTextbox("value"), lastName);
+        Assert.assertEquals(customerInfoPageObject.getEmailTextbox("value"), email);
+        Assert.assertEquals(customerInfoPageObject.getCompanyNameTextbox("value"), companyName);
 
     }
 
