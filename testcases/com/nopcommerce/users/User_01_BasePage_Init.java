@@ -15,6 +15,7 @@ public class User_01_BasePage_Init {
     WebDriver driver;
     BasePage basePage;
 
+
     @BeforeClass
     public void beforeClass() {
         driver = new FirefoxDriver();
