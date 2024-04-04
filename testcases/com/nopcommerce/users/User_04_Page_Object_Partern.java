@@ -35,6 +35,7 @@ public class User_04_Page_Object_Partern extends BaseTest {
         driver = new FirefoxDriver();
         driver.get("https://demo.nopcommerce.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        driver.manage().window().maximize();
         homePageObject = new HomePageObject(driver);
 
     }
@@ -60,17 +61,18 @@ public class User_04_Page_Object_Partern extends BaseTest {
 
     }
     @Test
-    public void User_02_Login(){
+    public void User_02_Login() {
         registerPageObject.clickOnLoginLink();
         loginPageObject = new LoginPageObject(driver);
         loginPageObject.inputEmailTextbox(email);
         loginPageObject.inputPasswordTextbox(password);
         loginPageObject.clickOnLoginButton();
-        homePageObject = new HomePageObject(driver);
+
 
     }
     @Test
     public void User_03_Customer_Info(){
+        homePageObject = new HomePageObject(driver);
         homePageObject.clickOnMyAccountLink();
         customerInfoPageObject = new CustomerInfoPageObject(driver);
         Assert.assertEquals(customerInfoPageObject.getFirstNameTextbox("value"),firsName );
