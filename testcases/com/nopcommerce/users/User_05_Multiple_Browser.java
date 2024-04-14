@@ -1,22 +1,22 @@
 package com.nopcommerce.users;
 
-import commons.BasePage;
 import commons.BaseTest;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.CustomerInfoPageObject;
 import pageObjects.HomePageObject;
 import pageObjects.LoginPageObject;
 import pageObjects.RegisterPageObject;
-import pageUIs.CustomerInfoPageUI;
 
 import java.time.Duration;
 
-public class User_04_Page_Object_Partern extends BaseTest {
+public class User_05_Multiple_Browser extends BaseTest {
     public WebDriver driver;
     private HomePageObject homePageObject;
     private LoginPageObject loginPageObject;
@@ -31,8 +31,12 @@ public class User_04_Page_Object_Partern extends BaseTest {
     String companyName ="TestAutomation";
     String password = "123456";
 
+    @Parameters("browser")
+
     @BeforeClass
-    public void beforeClass() {
+    public void beforeClass(String browserName) {
+        driver = getBrowserDriver(browserName);
+
         driver = new FirefoxDriver();
         driver.get("https://demo.nopcommerce.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));

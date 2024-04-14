@@ -3,12 +3,18 @@
 <suite name="Nopcommerce Automation Testing">
 
     <test name="Run on Firefox Browser">
+        <parameter name="browser" value="firefox"> </parameter>
         <classes>
-           <!-- <class name="com.nopcommerce.users.User_01_BasePage_Init" />
-            <class name="com.nopcommerce.users.User_02_BasePage_Static_Method" />
-            <class name="com.nopcommerce.users.User_03_BasePage_Inheritance"/>-->
-            <class name="com.nopcommerce.users.User_04_Page_Object_Partern"/>
+            <class name="com.nopcommerce.users.User_05_Multiple_Browser"/>
         </classes>
     </test>
+    <test name="Run on Chrome Browser">
+        <parameter name="browser" value="chrome"> </parameter>
+        <classes>
+            <class name="com.nopcommerce.users.User_05_Multiple_Browser"/>
+        </classes>
+    </test>
+
+
 
 </suite> <!-- Suite -->
