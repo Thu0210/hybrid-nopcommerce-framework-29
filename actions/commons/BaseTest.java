@@ -1,5 +1,6 @@
 package commons;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -9,12 +10,13 @@ import java.util.Random;
 public class BaseTest {
     private WebDriver driver;
     protected WebDriver getBrowserDriver(String browserName){
-        switch (browserName){
-            case "firefox":
-                driver = new FirefoxDriver();
+        BrowserList browserList = BrowserList.valueOf(browserName.toUpperCase());
+        switch (browserList){
+            case FIREFOX:
+                driver = WebDriverManager.firefoxdriver().create();
                 break;
-            case "chrome":
-                driver = new ChromeDriver();
+            case CHROME:
+                driver = WebDriverManager.chromedriver().create();
                 break;
             default:
                 throw new RuntimeException("Browser name is invalid!");
