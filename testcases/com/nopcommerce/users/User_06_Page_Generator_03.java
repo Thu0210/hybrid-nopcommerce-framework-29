@@ -43,7 +43,7 @@ public class User_06_Page_Generator_03 extends BaseTest {
 
     @Test
     public void User_01_Register() {
-        registerPageObject = homePageObject.clickToRegisterLink();
+        registerPageObject = homePageObject.openRegisterPage();
         registerPageObject.selectMaleRadio();
         registerPageObject.inputFirstNameTextbox(firsName);
         registerPageObject.inputLastNameTextbox(lastName);
@@ -62,7 +62,7 @@ public class User_06_Page_Generator_03 extends BaseTest {
     }
     @Test
     public void User_02_Login() {
-        loginPageObject = registerPageObject.clickOnLoginLink();
+        loginPageObject = registerPageObject.openLoginPage();
         loginPageObject.inputEmailTextbox(email);
         loginPageObject.inputPasswordTextbox(password);
         homePageObject = loginPageObject.clickOnLoginButton();
@@ -71,7 +71,7 @@ public class User_06_Page_Generator_03 extends BaseTest {
     }
     @Test
     public void User_03_Customer_Info(){
-        customerInfoPageObject = homePageObject.clickOnMyAccountLink();
+        customerInfoPageObject = homePageObject.openMyAccountPage();
         Assert.assertEquals(customerInfoPageObject.getFirstNameTextbox("value"),firsName );
         Assert.assertEquals(customerInfoPageObject.getLastNameTextbox("value"), lastName);
         Assert.assertEquals(customerInfoPageObject.getEmailTextbox("value"), email);

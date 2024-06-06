@@ -2,7 +2,6 @@ package com.nopcommerce.users;
 
 import commons.BaseTest;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -47,7 +46,7 @@ public class User_05_Multiple_Browser extends BaseTest {
 
     @Test
     public void User_01_Register() {
-        homePageObject.clickToRegisterLink();
+        homePageObject.openRegisterPage();
         registerPageObject = new RegisterPageObject(driver);
         registerPageObject.selectMaleRadio();
         registerPageObject.inputFirstNameTextbox(firsName);
@@ -67,7 +66,7 @@ public class User_05_Multiple_Browser extends BaseTest {
     }
     @Test
     public void User_02_Login() {
-        registerPageObject.clickOnLoginLink();
+        registerPageObject.openLoginPage();
         loginPageObject = new LoginPageObject(driver);
         loginPageObject.inputEmailTextbox(email);
         loginPageObject.inputPasswordTextbox(password);
@@ -78,7 +77,7 @@ public class User_05_Multiple_Browser extends BaseTest {
     @Test
     public void User_03_Customer_Info(){
         homePageObject = new HomePageObject(driver);
-        homePageObject.clickOnMyAccountLink();
+        homePageObject.openMyAccountPage();
         customerInfoPageObject = new CustomerInfoPageObject(driver);
         Assert.assertEquals(customerInfoPageObject.getFirstNameTextbox("value"),firsName );
         Assert.assertEquals(customerInfoPageObject.getLastNameTextbox("value"), lastName);

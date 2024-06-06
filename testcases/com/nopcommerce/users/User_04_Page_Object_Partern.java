@@ -1,6 +1,5 @@
 package com.nopcommerce.users;
 
-import commons.BasePage;
 import commons.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,7 +11,6 @@ import pageObjects.CustomerInfoPageObject;
 import pageObjects.HomePageObject;
 import pageObjects.LoginPageObject;
 import pageObjects.RegisterPageObject;
-import pageUIs.CustomerInfoPageUI;
 
 import java.time.Duration;
 
@@ -43,7 +41,7 @@ public class User_04_Page_Object_Partern extends BaseTest {
 
     @Test
     public void User_01_Register() {
-        homePageObject.clickToRegisterLink();
+        homePageObject.openRegisterPage();
         registerPageObject = new RegisterPageObject(driver);
         registerPageObject.selectMaleRadio();
         registerPageObject.inputFirstNameTextbox(firsName);
@@ -63,7 +61,7 @@ public class User_04_Page_Object_Partern extends BaseTest {
     }
     @Test
     public void User_02_Login() {
-        registerPageObject.clickOnLoginLink();
+        registerPageObject.openLoginPage();
         loginPageObject = new LoginPageObject(driver);
         loginPageObject.inputEmailTextbox(email);
         loginPageObject.inputPasswordTextbox(password);
@@ -74,7 +72,7 @@ public class User_04_Page_Object_Partern extends BaseTest {
     @Test
     public void User_03_Customer_Info(){
         homePageObject = new HomePageObject(driver);
-        homePageObject.clickOnMyAccountLink();
+        homePageObject.openMyAccountPage();
         customerInfoPageObject = new CustomerInfoPageObject(driver);
         Assert.assertEquals(customerInfoPageObject.getFirstNameTextbox("value"),firsName );
         Assert.assertEquals(customerInfoPageObject.getLastNameTextbox("value"), lastName);

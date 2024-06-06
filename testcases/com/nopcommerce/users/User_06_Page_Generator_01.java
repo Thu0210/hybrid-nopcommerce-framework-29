@@ -46,7 +46,7 @@ public class User_06_Page_Generator_01 extends BaseTest {
 
     @Test
     public void User_01_Register() {
-        homePageObject.clickToRegisterLink();
+        homePageObject.openRegisterPage();
         registerPageObject = new RegisterPageObject(driver);
         registerPageObject.selectMaleRadio();
         registerPageObject.inputFirstNameTextbox(firsName);
@@ -66,7 +66,7 @@ public class User_06_Page_Generator_01 extends BaseTest {
     }
     @Test
     public void User_02_Login() {
-        registerPageObject.clickOnLoginLink();
+        registerPageObject.openLoginPage();
         loginPageObject = new LoginPageObject(driver);
         loginPageObject.inputEmailTextbox(email);
         loginPageObject.inputPasswordTextbox(password);
@@ -77,7 +77,7 @@ public class User_06_Page_Generator_01 extends BaseTest {
     @Test
     public void User_03_Customer_Info(){
         homePageObject = new HomePageObject(driver);
-        homePageObject.clickOnMyAccountLink();
+        homePageObject.openMyAccountPage();
         customerInfoPageObject = new CustomerInfoPageObject(driver);
         Assert.assertEquals(customerInfoPageObject.getFirstNameTextbox("value"),firsName );
         Assert.assertEquals(customerInfoPageObject.getLastNameTextbox("value"), lastName);

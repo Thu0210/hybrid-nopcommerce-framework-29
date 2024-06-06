@@ -25,4 +25,6 @@ public class CustomerInfoPageObject extends BasePage {
     public String getCompanyNameTextbox(String value) {
         return getAttributeValue(driver, CustomerInfoPageUI.COMPANY_NAME_TEXTBOX, value);
     }
+
+
 }

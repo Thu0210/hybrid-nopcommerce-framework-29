@@ -16,5 +16,15 @@ public class PageGenerator {
     public static CustomerInfoPageObject getCustomerInfopage(WebDriver driver){
         return new CustomerInfoPageObject(driver);
     }
+    public static AddressPageObject getAddressPage(WebDriver driver){
+        return new AddressPageObject(driver);
+    }
+    public static OrderPageObject getOrderPage(WebDriver driver){
+        return new OrderPageObject(driver);
+    }
+    public static RewardPointPageObject getRewardPointPage(WebDriver driver){
+        return new RewardPointPageObject(driver);
+    }
+
 
 }

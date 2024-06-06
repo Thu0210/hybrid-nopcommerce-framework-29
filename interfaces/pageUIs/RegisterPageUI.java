@@ -18,4 +18,5 @@ public class RegisterPageUI {
     public static final String RESULT_MESSAGE = "//div[@class='result']";
 
 
+    public static final String LOGOUT_LINK ="//div[@class='header-links']//a[text()='Log out']" ;
 }
