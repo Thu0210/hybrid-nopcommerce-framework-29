@@ -8,10 +8,13 @@
 <!--            <class name="com.nopcommerce.users.User_06_Page_Generator_03"/>-->
 <!--        </classes>-->
 <!--    </test>-->
+    <parameter name="userURL" value="https://demo.nopcommerce.com/"/>
+    <parameter name="adminURL" value="https://admin-demo.nopcommerce.com/"/>
+
     <test name="Run on Firefox Browser">
         <parameter name="browser" value="firefox"> </parameter>
         <classes>
-            <class name="com.nopcommerce.users.User_07_Switch_Page_Object"/>
+            <class name="com.nopcommerce.users.User_09_Switch_Site_URL"/>
         </classes>
     </test>
 

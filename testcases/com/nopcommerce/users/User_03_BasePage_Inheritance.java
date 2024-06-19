@@ -15,6 +15,10 @@ public class User_03_BasePage_Inheritance extends BasePage {
     String firsName = "Lele", lastName ="LeNa", dayOfBirth = "10", monthOfBirth = "January",
             yearofBirth = "1998", email = "lele1202@gmail.com", companyName ="TestAutomation", password = "123456";
 
+    public User_03_BasePage_Inheritance(WebDriver driver) {
+        super(driver);
+    }
+
     @BeforeClass
     public void beforeClass() {
         driver = new FirefoxDriver();

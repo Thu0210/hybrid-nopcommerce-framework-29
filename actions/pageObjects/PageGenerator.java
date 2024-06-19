@@ -1,29 +1,37 @@
 package pageObjects;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import pageObjects.admin.AdminDashboardPO;
+import pageObjects.admin.AdminLoginPO;
+import pageObjects.user.*;
 
 public class PageGenerator {
-    public static HomePageObject getHomepage(WebDriver driver){
-        return new HomePageObject(driver);
+    public static UserHomePO getUserHomepage(WebDriver driver){
+        return new UserHomePO(driver);
     }
-    public static LoginPageObject getLoginpage(WebDriver driver){
-        return new LoginPageObject(driver);
+    public static UserLoginPO getUserLoginpage(WebDriver driver){
+        return new UserLoginPO(driver);
     }
-    public static RegisterPageObject getRegisterpage(WebDriver driver){
-        return new RegisterPageObject(driver);
+    public static UserRegisterPO getUserRegisterpage(WebDriver driver){
+        return new UserRegisterPO(driver);
     }
-    public static CustomerInfoPageObject getCustomerInfopage(WebDriver driver){
-        return new CustomerInfoPageObject(driver);
+    public static UserCustomerInfoPO getUserCustomerInfopage(WebDriver driver){
+        return new UserCustomerInfoPO(driver);
     }
-    public static AddressPageObject getAddressPage(WebDriver driver){
-        return new AddressPageObject(driver);
+    public static UserAddressPO getUserAddressPage(WebDriver driver){
+        return new UserAddressPO(driver);
     }
-    public static OrderPageObject getOrderPage(WebDriver driver){
-        return new OrderPageObject(driver);
+    public static UserOrderPO getUserOrderPage(WebDriver driver){
+        return new UserOrderPO(driver);
     }
-    public static RewardPointPageObject getRewardPointPage(WebDriver driver){
-        return new RewardPointPageObject(driver);
+    public static UserRewardPointPO getUserRewardPointPage(WebDriver driver){
+        return new UserRewardPointPO(driver);
+    }
+    public static AdminDashboardPO getAdminDashboardPage(WebDriver driver){
+        return new AdminDashboardPO(driver);
+    }
+    public  static AdminLoginPO getAdminLoginPage(WebDriver driver){
+        return new AdminLoginPO(driver);
     }
 
 

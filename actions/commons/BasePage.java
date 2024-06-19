@@ -15,8 +15,13 @@ import java.util.List;
 import java.util.Set;
 
 public class BasePage {
+    private WebDriver driver;
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+    }
+
     public static BasePage getBasePage(){
-        return new BasePage();
+        return new BasePage(getBasePage().driver);
     }
     public void openPageUrl(WebDriver driver, String url){
         driver.get(url);
@@ -250,29 +255,6 @@ public class BasePage {
     public void waitForElementClickable(WebDriver driver, String locator){
         new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(elementBy(locator)));
     }
-    public RewardPointPageObject openRewardPointPage(WebDriver driver) {
-        waitForElementClickable(driver, BasePageUI.REWARD_POINT_LINK);
-        clickToElement(driver, BasePageUI.REWARD_POINT_LINK);
-        return PageGenerator.getRewardPointPage(driver);
-    }
-
-    public CustomerInfoPageObject openCustomerInfoPage(WebDriver driver) {
-        waitForElementClickable(driver, BasePageUI.CUSTOMER_INFO_LINK);
-        clickToElement(driver, BasePageUI.CUSTOMER_INFO_LINK);
-        return PageGenerator.getCustomerInfopage(driver);
-    }
-    public AddressPageObject openAddressPage(WebDriver driver) {
-        waitForElementClickable(driver, BasePageUI.ADDRESS_LINK);
-        clickToElement(driver, BasePageUI.ADDRESS_LINK);
-
-        return PageGenerator.getAddressPage(driver);
-    }
-    public OrderPageObject openOrderPage(WebDriver driver) {
-        waitForElementClickable(driver, BasePageUI.ORDER_LINK);
-        clickToElement(driver, BasePageUI.ORDER_LINK);
-        return PageGenerator.getOrderPage(driver);
-    }
-
 
     public void SleepInSecond(int milisecond){
         try {
@@ -281,4 +263,5 @@ public class BasePage {
             throw new RuntimeException(e);
         }
     }
+
 }

@@ -19,7 +19,7 @@ public class User_01_BasePage_Init {
     @BeforeClass
     public void beforeClass() {
         driver = new FirefoxDriver();
-        basePage = new BasePage();
+        basePage = new BasePage(driver);
         driver.get("https://demo.nopcommerce.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 

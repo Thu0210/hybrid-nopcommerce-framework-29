@@ -9,15 +9,19 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.*;
+import pageObjects.user.UserCustomerInfoPO;
+import pageObjects.user.UserHomePO;
+import pageObjects.user.UserLoginPO;
+import pageObjects.user.UserRegisterPO;
 
 import java.time.Duration;
 
 public class User_06_Page_Generator_03 extends BaseTest {
     public WebDriver driver;
-    private HomePageObject homePageObject;
-    private LoginPageObject loginPageObject;
-    private RegisterPageObject registerPageObject;
-    private CustomerInfoPageObject customerInfoPageObject;
+    private UserHomePO homePageObject;
+    private UserLoginPO loginPageObject;
+    private UserRegisterPO registerPageObject;
+    private UserCustomerInfoPO customerInfoPageObject;
     String firsName = "Lele";
     String lastName ="LeNa";
     String dayOfBirth = "10";
@@ -37,7 +41,7 @@ public class User_06_Page_Generator_03 extends BaseTest {
         driver.get("https://demo.nopcommerce.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().window().maximize();
-        homePageObject = PageGenerator.getHomepage(driver);
+        homePageObject = PageGenerator.getUserHomepage(driver);
 
     }
 
@@ -62,7 +66,7 @@ public class User_06_Page_Generator_03 extends BaseTest {
     }
     @Test
     public void User_02_Login() {
-        loginPageObject = registerPageObject.openLoginPage();
+        loginPageObject = homePageObject.openLoginPage();
         loginPageObject.inputEmailTextbox(email);
         loginPageObject.inputPasswordTextbox(password);
         homePageObject = loginPageObject.clickOnLoginButton();

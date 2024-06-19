@@ -13,7 +13,7 @@ import pageObjects.user.*;
 
 import java.time.Duration;
 
-public class User_07_Switch_Page_Object extends BaseTest {
+public class User_08_Page_Navigation extends BaseTest {
     public WebDriver driver;
     private UserHomePO homePage;
     private UserLoginPO loginPage;
