@@ -93,13 +93,13 @@ public class BasePage {
         driver.switchTo().window(parentID);
     }
     public WebElement findElement(WebDriver driver, String locator){
-        return driver.findElement(By.xpath(locator));
+        return driver.findElement(getByLocator(locator));
     }
     public List<WebElement> findlistElements(WebDriver driver, String locator){
-        return driver.findElements(By.xpath(locator));
+        return driver.findElements(getByLocator(locator));
     }
     public By elementBy (String locator){
-       return By.xpath(locator);
+       return getByLocator(locator);
     }
     public void clickToElement(WebDriver driver, String locator){
         findElement(driver, locator).click();
@@ -126,7 +126,7 @@ public class BasePage {
         findElement(driver, parentLocator).click();
         SleepInSecond(2);
         List<WebElement> allItems = new WebDriverWait(driver, Duration.ofSeconds(15)).
-                until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(childItemLocator)));
+                until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByLocator(childItemLocator)));
     }
     public String getAttributeValue(WebDriver driver, String locator, String attributeName){
         return findElement(driver, locator).getAttribute(attributeName);
@@ -244,7 +244,7 @@ public class BasePage {
                 findElement(driver, locator));
     }
     public void waitForElementVisible(WebDriver driver, String locator){
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(getByLocator(locator)));
     }
     public void waitForElementPresence(WebDriver driver, String locator){
         new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfElementLocated(elementBy(locator)));
@@ -254,6 +254,26 @@ public class BasePage {
     }
     public void waitForElementClickable(WebDriver driver, String locator){
         new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(elementBy(locator)));
+    }
+
+    private By getByLocator(String prefixLocator) {
+        By by = null;
+        if (prefixLocator.startsWith("CSS") || prefixLocator.startsWith("css") || prefixLocator.startsWith("Css")) {
+            by = By.cssSelector(prefixLocator.substring(4));
+        } else if (prefixLocator.startsWith("id=") || prefixLocator.startsWith("ID=") || prefixLocator.startsWith("Id=")) {
+            by = By.id(prefixLocator.substring(3));
+        } else if (prefixLocator.startsWith("name=") || prefixLocator.startsWith("Name=") || prefixLocator.startsWith("Name=")) {
+            by = By.name(prefixLocator.substring(5));
+        } else if (prefixLocator.startsWith("tagname=")|| prefixLocator.startsWith("Tagname=") || prefixLocator.startsWith("Tagname=")) {
+            by = By.tagName(prefixLocator.substring(8));
+        } else if (prefixLocator.startsWith("class=") || prefixLocator.startsWith("Class=") || prefixLocator.startsWith("Class=")) {
+            by = By.className(prefixLocator.substring(6));
+        } else if (prefixLocator.startsWith("xpath=")|| prefixLocator.startsWith("Xpath=") || prefixLocator.startsWith("Xpath=")) {
+            by = By.xpath(prefixLocator.substring(6));
+        } else {
+            throw new RuntimeException("Locator is not correct");
+        }
+        return by;
     }
 
     public void SleepInSecond(int milisecond){

@@ -78,6 +78,8 @@ public class User_09_Switch_Site_URL extends BaseTest {
     public void User_02_Admin_Site_To_User_Site() {
         adminDashboardPage.openPageUrl(driver, userURLValue);
         userHomePage = PageGenerator.getUserHomepage(driver);
+        userCustomerInfoPage = userHomePage.openMyAccountPage();
+
 
     }
     @AfterClass
