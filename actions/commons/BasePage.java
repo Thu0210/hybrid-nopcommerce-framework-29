@@ -104,8 +104,14 @@ public class BasePage {
     public void clickToElement(WebDriver driver, String locator){
         findElement(driver, locator).click();
     }
+    public void clickToElement(WebDriver driver, String locator, String... values){
+        findElement(driver, castRestParameter(locator, values)).click();
+    }
     public void sendkeyToElement(WebDriver driver, String locator, String keyToSend){
         findElement(driver, locator).sendKeys(keyToSend);
+    }
+    public void sendkeyToElement(WebDriver driver, String locator, String keyToSend, String... values){
+        findElement(driver, castRestParameter(locator, values)).sendKeys(keyToSend);
     }
 //    public void selectionDropdown(WebDriver driver, String locator){
 //        new Select(findElement(driver, locator));
@@ -113,6 +119,11 @@ public class BasePage {
     public void selectItemInDropdownByVisibletext(WebDriver driver, String locator, String text){
         new Select(findElement(driver, locator)).selectByVisibleText(text);
     }
+
+    public void selectItemInDropdownByValue(WebDriver driver, String locator, String value){
+        new Select(findElement(driver, locator)).selectByValue(value);
+    }
+
     public void selectItemInDropDownById(WebDriver driver, String locator, int index){
         new Select(findElement(driver, locator)).selectByIndex(index);
     }
@@ -138,6 +149,9 @@ public class BasePage {
     public String getCSSValue(WebDriver driver, String locator, String cssValue){
         return findElement(driver, locator).getCssValue(cssValue);
     }
+    public String getCssValue(WebDriver driver, String locator,String cssValue, String... values){
+        return findElement(driver, castRestParameter(locator, values)).getCssValue(cssValue);
+    }
     public String getHexaColorFromRGBA(String rgbaValue){
         return Color.fromString(rgbaValue).asHex().toUpperCase();
     }
@@ -157,11 +171,20 @@ public class BasePage {
     public Boolean isElementDisplayed (WebDriver driver, String locator){
         return findElement(driver, locator).isDisplayed();
     }
+    public Boolean isElementDisplayed (WebDriver driver, String locator, String...values){
+        return findElement(driver, castRestParameter(locator, values)).isDisplayed();
+    }
     public Boolean isElementSelected (WebDriver driver, String locator){
         return findElement(driver, locator).isSelected();
     }
+    public Boolean isElementSelected (WebDriver driver, String locator, String...values){
+        return findElement(driver, castRestParameter(locator, values)).isSelected();
+    }
     public Boolean isElementEnabled (WebDriver driver, String locator){
         return findElement(driver, locator).isEnabled();
+    }
+    public Boolean isElementEnabled (WebDriver driver, String locator, String...values){
+        return findElement(driver, castRestParameter(locator, values)).isEnabled();
     }
     public void switchToIframe(WebDriver driver, String locator){
         driver.switchTo().frame(findElement(driver, locator));
@@ -184,6 +207,9 @@ public class BasePage {
     public void rightClickToElement(WebDriver driver, String locator){
         new Actions(driver).contextClick(findElement(driver,locator)).perform();
     }
+    public void rightClickToElement(WebDriver driver, String locator, String...values){
+        new Actions(driver).contextClick(findElement(driver, castRestParameter(locator, values))).perform();
+    }
     public void dragAndDropToElement(WebDriver driver, String sourceLocator, String targetLocator){
         new Actions(driver).dragAndDrop(findElement(driver,sourceLocator), findElement(driver, targetLocator)).perform();
     }
@@ -192,6 +218,9 @@ public class BasePage {
     }
     public void scrollToElement(WebDriver driver, String locator){
         new Actions(driver).scrollToElement(findElement(driver, locator));
+    }
+    public void scrollToElement(WebDriver driver, String locator, String...values){
+        new Actions(driver).scrollToElement(findElement(driver, castRestParameter(locator, values)));
     }
     public void hightlightElement(WebDriver driver, String locator) {
         WebElement element = findElement(driver, locator);
@@ -246,14 +275,30 @@ public class BasePage {
     public void waitForElementVisible(WebDriver driver, String locator){
         new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(getByLocator(locator)));
     }
+    public void waitForElementVisible(WebDriver driver, String locator, String...values){
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOfElementLocated(getByLocator(castRestParameter(locator, values))));
+    }
     public void waitForElementPresence(WebDriver driver, String locator){
         new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfElementLocated(elementBy(locator)));
+    }
+    public void waitForElementPresence(WebDriver driver, String locator, String...values){
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfElementLocated(elementBy(castRestParameter(locator, values))));
     }
     public void waitForElementInVisible(WebDriver driver, String locator){
         new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.invisibilityOfElementLocated(elementBy(locator)));
     }
+    public void waitForElementInVisible(WebDriver driver, String locator, String...values){
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.invisibilityOfElementLocated(elementBy(castRestParameter(locator, values))));
+    }
     public void waitForElementClickable(WebDriver driver, String locator){
         new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(elementBy(locator)));
+    }
+    public void waitForElementClickable(WebDriver driver, String locator, String...values){
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(elementBy(castRestParameter(locator, values))));
+    }
+
+    private String castRestParameter(String locator, String... values){
+        return String.format(locator, (Object[]) values);
     }
 
     private By getByLocator(String prefixLocator) {
