@@ -2,14 +2,13 @@ package com.nopcommerce.users;
 
 import commons.BaseTest;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pageObjects.PageGenerator;
-import pageObjects.user.*;
+import pageObjects.nopCommerce.PageGenerator;
+import pageObjects.nopCommerce.user.*;
 
 import java.time.Duration;
 
@@ -36,9 +35,6 @@ public class User_10_Dynamic_Locator extends BaseTest {
     @BeforeClass
     public void beforeClass(String browserName) {
         driver = getBrowserDriver(browserName);
-
-        driver = new FirefoxDriver();
-        driver.get("https://demo.nopcommerce.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().window().maximize();
         homePage = PageGenerator.getUserHomepage(driver);

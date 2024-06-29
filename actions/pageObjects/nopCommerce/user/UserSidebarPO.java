@@ -1,9 +1,9 @@
-package pageObjects.user;
+package pageObjects.nopCommerce.user;
 
 import commons.BasePage;
 import org.openqa.selenium.WebDriver;
-import pageObjects.PageGenerator;
-import pageUIs.users.UserSidebarBaseUI;
+import pageObjects.nopCommerce.PageGenerator;
+import pageUIs.nopCommerce.users.UserSidebarBaseUI;
 
 public class UserSidebarPO extends BasePage {
     WebDriver driver;

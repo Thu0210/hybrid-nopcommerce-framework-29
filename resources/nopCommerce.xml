@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Nopcommerce Automation Testing">
+
+<!--    <test name="Run on Chrome Browser">-->
+<!--        <parameter name="browser" value="chrome"> </parameter>-->
+<!--        <classes>-->
+<!--            <class name="com.nopcommerce.users.User_06_Page_Generator_03"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+    <parameter name="userURL" value="https://demo.nopcommerce.com/"/>
+    <parameter name="adminURL" value="https://admin-demo.nopcommerce.com/"/>
+
+    <test name="Run on Firefox Browser">
+        <parameter name="browser" value="firefox"> </parameter>
+        <classes>
+            <class name="com.nopcommerce.users.User_10_Dynamic_Locator"/>
+        </classes>
+    </test>
+
+
+
+</suite> <!-- Suite -->
