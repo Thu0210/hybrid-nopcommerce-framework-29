@@ -8,7 +8,8 @@
 <!--            <class name="com.nopcommerce.users.User_06_Page_Generator_03"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-    <parameter name="URL" value="https://www.jqueryscript.net/demo/jQuery-Dynamic-Data-Grid-Plugin-appendGrid/#google_vignette"/>
+    <parameter name="URL" value="https://www.jqueryscript.net/demo/CRUD-Data-Grid-Plugin-jQuery-Quickgrid/"/>
+<!--    <parameter name="URL" value="https://www.jqueryscript.net/demo/jQuery-Dynamic-Data-Grid-Plugin-appendGrid/#google_vignette"></parameter>-->
 
     <test name="Run on Firefox Browser">
         <parameter name="browser" value="firefox"> </parameter>

@@ -46,4 +46,38 @@ public class HomePO extends BasePage {
         clickToElement(driver, HomePageUI.DYNAMIC_EDIT_BUTTON_BY_COUNTRY_NAME, countryName);
         SleepInSecond(2);
     }
+
+    public void clickToLoadDataButton() {
+        waitForElementClickable(driver, HomePageUI.LOAD_DATA_BUTTON);
+        clickToElement(driver, HomePageUI.LOAD_DATA_BUTTON);
+        SleepInSecond(2);
+
+    }
+
+    public void enterToTextboxByIndex(String rowIndex, String columnName, String valueToSendkey) {
+        int columnNumber = findListElements(driver, HomePageUI.DYNAMIC_PRECEDING_SIBLING_COLUMN_NUMBER, columnName).size() + 1;
+        String columnIndex = String.valueOf(columnNumber);
+        sendkeyToElement(driver, HomePageUI.DYNAMIC_TEXTBOX_BY_ROW_AND_COLUMN_INDEX, valueToSendkey, rowIndex, columnIndex);
+
+    }
+
+    public void selectToDropdownByIndex(String rowIndex, String columnName, String valueToSelect) {
+        int columnNumber = findListElements(driver, HomePageUI.DYNAMIC_PRECEDING_SIBLING_COLUMN_NUMBER, columnName).size() + 1;
+        String columnIndex = String.valueOf(columnNumber);
+        selectionDropdown(driver, HomePageUI.DYNAMIC_DROPDOWN_BY_ROW_AND_COLUMN_INDEX, valueToSelect, rowIndex, columnIndex);
+    }
+
+    public void checkToCheckboxByIndex(String rowIndex, String columnName, boolean checkOrUnchecked) {
+        int columnNumber = findListElements(driver, HomePageUI.DYNAMIC_PRECEDING_SIBLING_COLUMN_NUMBER, columnName).size() + 1;
+        String columnIndex = String.valueOf(columnNumber);
+        if(checkOrUnchecked){
+            checkTheCheckBoxOrRadio(driver, HomePageUI.DYNAMIC_CHECKBOX_BY_ROW_AMD_COLUMN_INDEX, rowIndex, columnIndex);
+        } else {
+            unCheckTheCheckBox(driver, HomePageUI.DYNAMIC_CHECKBOX_BY_ROW_AMD_COLUMN_INDEX, rowIndex, columnIndex);
+        }
+    }
+
+    public void clickToIconByIndex(String rowIndex, String iconName) {
+        clickToElement(driver, HomePageUI.DYNAMIC_ICON_BY_ROW_AND_COLUMN_INDEX, rowIndex, iconName);
+    }
 }

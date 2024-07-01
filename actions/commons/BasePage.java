@@ -95,6 +95,9 @@ public class BasePage {
     public List<WebElement> findlistElements(WebDriver driver, String locator){
         return driver.findElements(getByLocator(locator));
     }
+    public List<WebElement> findListElements(WebDriver driver, String locator, String...values){
+        return driver.findElements(getByLocator(castRestParameter(locator, values)));
+    }
     public By elementBy (String locator){
        return getByLocator(locator);
     }
@@ -110,9 +113,12 @@ public class BasePage {
     public void sendkeyToElement(WebDriver driver, String locator, String keyToSend, String... values){
         getElement(driver, castRestParameter(locator, values)).sendKeys(keyToSend);
     }
-//    public void selectionDropdown(WebDriver driver, String locator){
-//        new Select(findElement(driver, locator));
-//    }
+    public void selectionDropdown(WebDriver driver, String locator){
+        new Select(getElement(driver, locator));
+    }
+    public void selectionDropdown(WebDriver driver, String locator, String...values){
+        new Select(getElement(driver, castRestParameter(locator, values)));
+    }
     public void selectItemInDropdownByVisibletext(WebDriver driver, String locator, String text){
         new Select(getElement(driver, locator)).selectByVisibleText(text);
     }
@@ -163,9 +169,19 @@ public class BasePage {
             getElement(driver, locator).click();
         }
     }
+    public void checkTheCheckBoxOrRadio( WebDriver driver, String locator, String...values){
+        if(!getElement(driver, castRestParameter(locator, values)).isSelected()){
+            getElement(driver, castRestParameter(locator, values)).click();
+        }
+    }
     public void unCheckTheCheckBox( WebDriver driver, String locator){
         if(getElement(driver, locator).isSelected()){
             getElement(driver, locator).click();
+        }
+    }
+    public void unCheckTheCheckBox( WebDriver driver, String locator, String...values){
+        if(getElement(driver, castRestParameter(locator, values)).isSelected()){
+            getElement(driver, castRestParameter(locator, values)).click();
         }
     }
     public Boolean isElementDisplayed (WebDriver driver, String locator){

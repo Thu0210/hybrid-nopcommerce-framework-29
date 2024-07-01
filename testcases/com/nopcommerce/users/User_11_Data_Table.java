@@ -46,7 +46,7 @@ public class User_11_Data_Table extends BaseTest {
         homePage.refreshPage(driver);
 
     }
-    @Test
+
     public void Table_03_Delete_Edit() {
         homePage.enterToTextboxByHeaderName("Country", "Algeria");
         homePage.deleteRowByCountryName("Algeria");
@@ -56,6 +56,24 @@ public class User_11_Data_Table extends BaseTest {
         homePage.refreshPage(driver);
         homePage.enterToTextboxByHeaderName("Country", "Aruba");
         homePage.editRowByCountryName("Aruba");
+
+    }
+    @Test
+    public void Table_04_Action_By_Index() {
+        homePage.openPageUrl(driver, "https://www.jqueryscript.net/demo/jQuery-Dynamic-Data-Grid-Plugin-appendGrid/#google_vignette");
+        homePage.clickToLoadDataButton();
+        homePage.enterToTextboxByIndex("4", "Contact Person", "John");
+        homePage.enterToTextboxByIndex("2", "Company", "Google");
+        homePage.selectToDropdownByIndex("5", "Country", "HongKong");
+        homePage.selectToDropdownByIndex("8", "Country", "India");
+        homePage.checkToCheckboxByIndex("3", "NPO", true);
+        homePage.checkToCheckboxByIndex("5", "NPO", false);
+        homePage.clickToIconByIndex("8", "Move up");
+        homePage.clickToIconByIndex("7", "Remove");
+        homePage.clickToIconByIndex("6", "Insert");
+
+
+
 
     }
 
