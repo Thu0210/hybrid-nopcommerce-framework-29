@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Orange HRM 5">
+
+<!--    <test name="Run on Chrome Browser">-->
+<!--        <parameter name="browser" value="chrome"> </parameter>-->
+<!--        <classes>-->
+<!--            <class name="com.nopcommerce.users.User_06_Page_Generator_03"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <parameter name="url" value="http://localhost:8280/web/index.php/auth/login"/>
+
+    <test name="Run on Firefox Browser">
+        <parameter name="browser" value="firefox"> </parameter>
+        <classes>
+            <class name="orangehrm.employee.pim.PIM_01_Employee"/>
+        </classes>
+    </test>
+
+
+
+</suite> <!-- Suite -->

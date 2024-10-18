@@ -6,6 +6,7 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageUIs.orangeHRM.BasePUI;
 
 import java.time.Duration;
 import java.util.List;
@@ -191,6 +192,12 @@ public class BasePage {
     public Boolean isElementDisplayed (WebDriver driver, String locator, String...values){
         return getElement(driver, castRestParameter(locator, values)).isDisplayed();
     }
+    public List<WebElement> getListElement (WebDriver driver, String locator){
+        return driver.findElements(getByLocator(locator));
+    }
+    public List<WebElement> getListElement(WebDriver driver, String locator, String...values){
+        return driver.findElements(getByLocator(castRestParameter(locator, values)));
+    }
     public Boolean isElementSelected (WebDriver driver, String locator){
         return getElement(driver, locator).isSelected();
     }
@@ -302,19 +309,28 @@ public class BasePage {
         new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfElementLocated(elementBy(locator)));
     }
     public void waitForElementPresence(WebDriver driver, String locator, String...values){
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfElementLocated(elementBy(castRestParameter(locator, values))));
+        new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(ExpectedConditions.presenceOfElementLocated(elementBy(castRestParameter(locator, values))));
     }
     public void waitForElementInVisible(WebDriver driver, String locator){
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.invisibilityOfElementLocated(elementBy(locator)));
+        new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(ExpectedConditions.invisibilityOfElementLocated(elementBy(locator)));
     }
     public void waitForElementInVisible(WebDriver driver, String locator, String...values){
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.invisibilityOfElementLocated(elementBy(castRestParameter(locator, values))));
+        new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(ExpectedConditions.invisibilityOfElementLocated(elementBy(castRestParameter(locator, values))));
+    }
+    public Boolean waitForListElementInVisible(WebDriver driver, String locator){
+        return new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(ExpectedConditions.invisibilityOfAllElements(getListElement(driver, locator)));
     }
     public void waitForElementClickable(WebDriver driver, String locator){
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(elementBy(locator)));
+        new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(ExpectedConditions.elementToBeClickable(elementBy(locator)));
     }
     public void waitForElementClickable(WebDriver driver, String locator, String...values){
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(elementBy(castRestParameter(locator, values))));
+        new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(ExpectedConditions.elementToBeClickable(elementBy(castRestParameter(locator, values))));
     }
 
     private String castRestParameter(String locator, String... values){
@@ -349,4 +365,8 @@ public class BasePage {
         }
     }
 
+    public boolean waitAllLoadingIconInvisible(WebDriver driver) {
+        return waitForListElementInVisible(driver, BasePUI.LOADING_ICON);
+
+    }
 }
