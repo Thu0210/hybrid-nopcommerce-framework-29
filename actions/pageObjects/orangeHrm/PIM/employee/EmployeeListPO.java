@@ -18,4 +18,15 @@ public class EmployeeListPO extends BasePage {
         waitAllLoadingIconInvisible(driver);
         return PageGenerator.getAddNewEmployeePage(driver);
     }
+    public PersonalDetailsPO clickToEmployeeAvartarImage() {
+        waitForElementClickable(driver, EmployeeListPUI.EMPLOYEE_IMAGE);
+        clickToElement(driver, EmployeeListPUI.EMPLOYEE_IMAGE);
+        return PageGenerator.getPersonalDetailsPage(driver);
+    }
+
+    public PersonalDetailsPO openPersonalDetailsPage() {
+        waitForElementClickable(driver, EmployeeListPUI.PERSONAL_DETAIL_TAB);
+        clickToElement(driver, EmployeeListPUI.PERSONAL_DETAIL_TAB);
+        return PageGenerator.getPersonalDetailsPage(driver);
+    }
 }

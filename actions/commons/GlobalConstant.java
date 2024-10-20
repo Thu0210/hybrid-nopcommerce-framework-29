@@ -1,9 +1,12 @@
 package commons;
 
+import java.io.File;
+
 public class GlobalConstant {
     // System Infor
     public static final String PROJECT_PATH = System.getProperty("user.dir");
     public static final String OS_NAME = System.getProperty("os.name");
+    public static final String SEPARATOR = File.separator;
 
     // App Infor User
     public static final String DEV_USER_URL = "";
@@ -22,8 +25,8 @@ public class GlobalConstant {
     public static final long LONG_TIMEOUT = 30;
 
     // Download / Upload file
-    public static final String DOWNLOAD_FOLDER = PROJECT_PATH + "\\downloadFiles";
-    public static final String UPLOAD_FOLDER = PROJECT_PATH + "\\uploadFiles";
+    public static final String UPLOAD_PATH = PROJECT_PATH + SEPARATOR + "uploadFiles" + SEPARATOR;
+    public static final String DOWNLOAD_PATH = PROJECT_PATH + SEPARATOR + "downloadFiles" + SEPARATOR;
 
     // Retry case failed
     public static final int RETRY_COUNT = 3;

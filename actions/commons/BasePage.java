@@ -68,6 +68,15 @@ public class BasePage {
             }
         }
     }
+    public void uploadMultipleFiles(WebDriver driver, String...fileNames){
+        String filePath = GlobalConstant.UPLOAD_PATH;
+        String fullFileName = "";
+        for(String file : fileNames){
+            fullFileName += filePath + file + "\n";
+        }
+        fullFileName = fullFileName.trim();
+        getElement(driver, BasePUI.UPLOAD_FILE_TYPE).sendKeys(fullFileName);
+    }
 
     public void switchToWindowByTitle(WebDriver driver, String title) {
         Set<String> allWindows = driver.getWindowHandles();
@@ -162,8 +171,8 @@ public class BasePage {
     public String getHexaColorFromRGBA(String rgbaValue){
         return Color.fromString(rgbaValue).asHex().toUpperCase();
     }
-    public int getElementSize(WebDriver driver, String locator){
-        return findlistElements(driver, locator).size();
+    public Dimension getElementSize(WebDriver driver, String locator){
+        return getElement(driver, locator).getSize();
     }
     public void checkTheCheckBoxOrRadio( WebDriver driver, String locator){
         if(!getElement(driver, locator).isSelected()){

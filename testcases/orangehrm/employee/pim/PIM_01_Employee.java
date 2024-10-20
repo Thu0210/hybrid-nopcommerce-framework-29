@@ -1,9 +1,11 @@
 package orangehrm.employee.pim;
 
 import commons.BaseTest;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -24,6 +26,7 @@ public class PIM_01_Employee extends BaseTest {
     private PersonalDetailsPO personalDetailsPage;
     private AddNewEmployeePO addNewEmployeePage;
     private String employeeID, firstName, lastName;
+    private String avatarImageName = "unnamed.png";
 
     @Parameters({"browser", "url"})
     @BeforeClass
@@ -44,23 +47,40 @@ public class PIM_01_Employee extends BaseTest {
         addNewEmployeePage.entertoFirstNameTextbox(firstName);
         addNewEmployeePage.entertoLastNameTextbox(lastName);
         employeeID = addNewEmployeePage.getEmployeeID();
-
-        personalDetailsPage = addNewEmployeePage.clickToSaveButtonEmployeeContainer();
+        employeeListPage = addNewEmployeePage.clickToSaveButtonEmployeeContainer();
 
     }
     @Test
     public void Employee_02_Upload_Avatar(){
-        personalDetailsPage.clickToEmployeeAvartarImage();
-        personalDetailsPage.loadAvartarImage();
-        personalDetailsPage.clickToSaveButtonAtProfileContainer();
+        personalDetailsPage = employeeListPage.clickToEmployeeAvartarImage();
+        personalDetailsPage.clickToEmployeeAvartarDetails();
+        Dimension beforeUpload = personalDetailsPage.getAvatarSize();
+        personalDetailsPage.uploadMultipleFiles(driver, avatarImageName);
+        employeeListPage = personalDetailsPage.clickToSaveButtonAtProfileContainer();
+        Assert.assertTrue(personalDetailsPage.isSuccessMessageIsDisplayed());
+        personalDetailsPage.waitAllLoadingIconInvisible(driver);
+        Assert.assertFalse(personalDetailsPage.isProfileAvatarUpdatedSuccess(beforeUpload));
 
     }
     @Test
-    public void Employee_03_Personal_Detals(){
+    public void Employee_03_Personal_Details(){
+        personalDetailsPage = employeeListPage.openPersonalDetailsPage();
+        personalDetailsPage.enterToFirstNameTextbox("");
+        personalDetailsPage.enterToLastNameTextbox("");
+        Assert.assertEquals(personalDetailsPage.getEmployeeID(), employeeID);
+        personalDetailsPage.enterToLicenseDriverTextbox("");
+        personalDetailsPage.enterToLicenExpiryDateTextbox("");
+        personalDetailsPage.selectNationalityDropdown("");
+        personalDetailsPage.selectMaritalStatusDropdown("");
+        personalDetailsPage.enterToDateOfBirthTextbox("");
+        personalDetailsPage.selectGenderMaleRadioButton("");
+        personalDetailsPage.clickToSaveButtonAtPersonalDetailContainer();
+
+
 
     }
     @Test
-    public void Employee_04_Contact_Detals(){
+    public void Employee_04_Contact_Details(){
 
     }
     @Test

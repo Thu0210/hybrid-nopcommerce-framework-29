@@ -28,10 +28,10 @@ public class AddNewEmployeePO extends BasePage {
         return getAttributeValue(driver, AddNewPUI.EMPLOYEE_ID_TEXTBOX, "value");
     }
 
-    public PersonalDetailsPO clickToSaveButtonEmployeeContainer() {
+    public EmployeeListPO clickToSaveButtonEmployeeContainer() {
         waitForElementClickable(driver, AddNewPUI.SAVE_BUTTON_AT_ADD_EMPLOYEE_CONTAINER);
         clickToElement(driver, AddNewPUI.SAVE_BUTTON_AT_ADD_EMPLOYEE_CONTAINER);
         waitAllLoadingIconInvisible(driver);
-        return PageGenerator.getPersonalDetailsPage(driver);
+        return PageGenerator.getEmployeeListPage(driver);
     }
 }
