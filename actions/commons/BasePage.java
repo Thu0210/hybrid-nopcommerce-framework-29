@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageUIs.orangeHRM.BasePUI;
+import pageUIs.orangeHRM.pim.employee.PersonalDetailsPUI;
 
 import java.time.Duration;
 import java.util.List;
@@ -365,6 +366,13 @@ public class BasePage {
         }
         return by;
     }
+    public void waitForElementSelected(WebDriver driver, String locator ){
+        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstant.LONG_TIMEOUT)).until(ExpectedConditions.elementToBeSelected(getByLocator(locator)));
+
+    }
+    public void waitForElementSelected(WebDriver driver, String locator, String...values){
+        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstant.LONG_TIMEOUT)).until(ExpectedConditions.elementToBeSelected(getByLocator(castRestParameter(locator, values))));
+    }
 
     public void SleepInSecond(int milisecond){
         try {
@@ -378,4 +386,9 @@ public class BasePage {
         return waitForListElementInVisible(driver, BasePUI.LOADING_ICON);
 
     }
+    public Boolean isSuccessMessageIsDisplayed(WebDriver driver) {
+        waitForElementVisible(driver, BasePUI.SUCCESS_MESSAGE);
+        return isElementDisplayed(driver, BasePUI.SUCCESS_MESSAGE);
+    }
+
 }

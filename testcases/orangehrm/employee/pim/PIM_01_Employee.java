@@ -25,7 +25,8 @@ public class PIM_01_Employee extends BaseTest {
     private EmployeeListPO employeeListPage;
     private PersonalDetailsPO personalDetailsPage;
     private AddNewEmployeePO addNewEmployeePage;
-    private String employeeID, firstName, lastName;
+    private String employeeID, firstName, lastName, editFirstName, editLastName;
+    private String driverLicenseNumber, driverLicenseExpiryDate, natinality, maritalStatus, dateOfBirth, gender;
     private String avatarImageName = "unnamed.png";
 
     @Parameters({"browser", "url"})
@@ -35,6 +36,14 @@ public class PIM_01_Employee extends BaseTest {
         loginPage = PageGenerator.getLoginPage(driver);
         firstName = "John";
         lastName = "Wick";
+        editFirstName = "Donal";
+        editLastName = "Mark";
+        driverLicenseNumber = "99999999";
+        driverLicenseExpiryDate = "2030/10/10";
+        natinality = "American";
+        maritalStatus = "Married";
+        dateOfBirth = "1995-03-05";
+        gender = "Male";
         loginPage.enterToUsernameTextbox("Thu Le");
         loginPage.enterToPasswordTextbox("Test123@!456");
         dashboardPage = loginPage.clickLoginButton();
@@ -57,7 +66,7 @@ public class PIM_01_Employee extends BaseTest {
         Dimension beforeUpload = personalDetailsPage.getAvatarSize();
         personalDetailsPage.uploadMultipleFiles(driver, avatarImageName);
         employeeListPage = personalDetailsPage.clickToSaveButtonAtProfileContainer();
-        Assert.assertTrue(personalDetailsPage.isSuccessMessageIsDisplayed());
+        Assert.assertTrue(personalDetailsPage.isSuccessMessageIsDisplayed(driver));
         personalDetailsPage.waitAllLoadingIconInvisible(driver);
         Assert.assertFalse(personalDetailsPage.isProfileAvatarUpdatedSuccess(beforeUpload));
 
@@ -65,17 +74,26 @@ public class PIM_01_Employee extends BaseTest {
     @Test
     public void Employee_03_Personal_Details(){
         personalDetailsPage = employeeListPage.openPersonalDetailsPage();
-        personalDetailsPage.enterToFirstNameTextbox("");
-        personalDetailsPage.enterToLastNameTextbox("");
-        Assert.assertEquals(personalDetailsPage.getEmployeeID(), employeeID);
-        personalDetailsPage.enterToLicenseDriverTextbox("");
-        personalDetailsPage.enterToLicenExpiryDateTextbox("");
-        personalDetailsPage.selectNationalityDropdown("");
-        personalDetailsPage.selectMaritalStatusDropdown("");
-        personalDetailsPage.enterToDateOfBirthTextbox("");
-        personalDetailsPage.selectGenderMaleRadioButton("");
+        personalDetailsPage.enterToFirstNameTextbox(editFirstName);
+        personalDetailsPage.enterToLastNameTextbox(editLastName);
+        personalDetailsPage.enterToLicenseDriverTextbox(driverLicenseNumber);
+        personalDetailsPage.enterToLicenExpiryDateTextbox(driverLicenseExpiryDate);
+        personalDetailsPage.selectNationalityDropdown(natinality);
+        personalDetailsPage.selectMaritalStatusDropdown(maritalStatus);
+        personalDetailsPage.enterToDateOfBirthTextbox(dateOfBirth);
+        personalDetailsPage.selectGenderMaleRadioButton(gender);
         personalDetailsPage.clickToSaveButtonAtPersonalDetailContainer();
-
+        Assert.assertTrue(personalDetailsPage.isSuccessMessageIsDisplayed(driver));
+        personalDetailsPage.waitAllLoadingIconInvisible(driver);
+        Assert.assertEquals(personalDetailsPage.getFirstNameTextboxValue(), editFirstName);
+        Assert.assertEquals(personalDetailsPage.getLastNameTextboxValue(), editLastName);
+        Assert.assertEquals(personalDetailsPage.getEmployeeID(), employeeID);
+        Assert.assertEquals(personalDetailsPage.getDriverLicenseTextboxValue(), driverLicenseNumber);
+        Assert.assertEquals(personalDetailsPage.getLicenseExpiryDateTextboxValue(), driverLicenseExpiryDate);
+        Assert.assertEquals(personalDetailsPage.getNationalityDropdownValue(), natinality);
+        Assert.assertEquals(personalDetailsPage.getMaritalStatusDropdownValue(), maritalStatus);
+        Assert.assertEquals(personalDetailsPage.getDateOfBirthTextboxValue(), dateOfBirth);
+        Assert.assertTrue(personalDetailsPage.isGenderMaleRadioSelected(gender));
 
 
     }
